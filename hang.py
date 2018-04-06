@@ -61,6 +61,12 @@ def printMenu():
     print 'I am thinking of a word that is', len(secretWord), ' letters long.'
     print '-------------'
 
+def updateAvailable(available, lettersGuessed):
+    for letter in available:
+        if letter in lettersGuessed:
+            available = available.replace(letter, '')
+    return available
+
 def hangman(secretWord):
 
     guesses = 8
@@ -72,9 +78,7 @@ def hangman(secretWord):
         print 'You have ', guesses, 'guesses left.'
 
         available = getAvailableLetters()
-        for letter in available:
-            if letter in lettersGuessed:
-                available = available.replace(letter, '')
+        updateAvailable(available, lettersGuessed)
 
         print 'Available letters', available
         letter = raw_input('Please guess a letter: ')
