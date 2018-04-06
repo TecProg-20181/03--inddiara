@@ -10,7 +10,7 @@ def loadWords():
     """
     print "Loading word list from file..."
     # inFile: file
-    inFile = open(WORDLIST_FILENAME, 'r', 0)
+    inFile = openFile(WORDLIST_FILENAME)
     # line: string
     line = inFile.readline()
     # wordlist: list of strings
@@ -18,6 +18,11 @@ def loadWords():
     print "  ", len(wordlist), "words loaded."
     return random.choice(wordlist)
 
+def openFile(fileName):
+    # inFile: file
+    inFile = open(fileName, 'r', 0)
+
+    return inFile
 
 def isWordGuessed(secretWord, lettersGuessed):
     secretLetters = []
@@ -51,13 +56,17 @@ def getAvailableLetters():
 
     return available
 
+def printMenu():
+    print 'Welcome to the game, Hangam!'
+    print 'I am thinking of a word that is', len(secretWord), ' letters long.'
+    print '-------------'
+
 def hangman(secretWord):
 
     guesses = 8
     lettersGuessed = []
-    print 'Welcome to the game, Hangam!'
-    print 'I am thinking of a word that is', len(secretWord), ' letters long.'
-    print '-------------'
+    #Calling function to print menu
+    printMenu()
 
     while  isWordGuessed(secretWord, lettersGuessed) == False and guesses >0:
         print 'You have ', guesses, 'guesses left.'
