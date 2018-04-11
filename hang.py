@@ -53,8 +53,14 @@ def getAvailableLetters():
 
 def printMenu(secretWord):
     # print 'Welcome to the game, Hangam!'
+    print('\nChoose level:')
+    print('1 - Easy')
+    print('2 - Medium')
+    level = raw_input('3 - Hard\n')
     print 'I am thinking of a word that is', len(secretWord), ' letters long.\n'
     print '------------------------------------------------\n'
+
+    return level
 
 
 def updateAvailable(available, lettersGuessed):
@@ -78,17 +84,22 @@ def checkWin(secretWord, lettersGuessed):
     if isWordGuessed(secretWord, lettersGuessed) == True:
         print 'Congratulations, you won!'
     else:
-        print 'Sorry, you ran out of guesses. The word was ', secretWord, '.'
+        print '\nSorry, you ran out of guesses. The word was ', secretWord, '.'
 
 
-def ifif():
-    guesses = 8
-    lettersGuessed = []
+def mode(level):
+    if level == '1':
+        guesses = 14
+    elif level == '2':
+        guesses = 8
+    elif level == '3':
+        guesses = 5
+    else:
+        guesses = 8
+    return guesses
 
-    secretWord = loadWords().lower()
 
-    printMenu(secretWord)
-
+def checkLetterInSecretWord(secretWord, lettersGuessed, guesses):
     while isWordGuessed(secretWord, lettersGuessed) == False and guesses > 0:
         print '\nYou have ', guesses, 'guesses left.'
 
@@ -119,12 +130,31 @@ def ifif():
     else:
         checkWin(secretWord, lettersGuessed)
 
+
+def startGame():
+    continuePlay = True
+    while continuePlay:
+
+        lettersGuessed = []
+
+        secretWord = loadWords().lower()
+
+        level = printMenu(secretWord)
+
+        guesses = mode(level)
+
+        checkLetterInSecretWord(secretWord, lettersGuessed, guesses)
+
+        continuePlay = menu()
+
+
+def menu():
     print('Press 1 to play again')
     option = raw_input('Press 2 to exit\n')
     if option == '1':
-        return False
-    elif option == '2':
         return True
+    elif option == '2':
+        return False
     else:
         quit()
 
@@ -135,7 +165,7 @@ def hangman():
     print 'Welcome to the game, Hangam!'
     finish = False
     while finish == False:
-        finish = ifif()
+        finish = startGame()
 
 
 hangman()
