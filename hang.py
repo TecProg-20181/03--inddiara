@@ -45,17 +45,14 @@ def getGuessedWord():
 
 
 def getAvailableLetters():
-    # 'abcdefghijklmnopqrstuvwxyz'
     available = string.ascii_lowercase
-
     return available
 
 
 def printMenu(secretWord):
-    # print 'Welcome to the game, Hangam!'
-    print('\nChoose level:')
-    print('1 - Easy')
-    print('2 - Medium')
+    print '\nChoose level:'
+    print '1 - Easy'
+    print '2 - Medium'
     level = raw_input('3 - Hard\n')
     print 'I am thinking of a word that is', len(secretWord), ' letters long.\n'
     print '------------------------------------------------\n'
@@ -85,6 +82,8 @@ def checkWin(secretWord, lettersGuessed):
         print 'Congratulations, you won!'
     else:
         print '\nSorry, you ran out of guesses. The word was ', secretWord, '.'
+
+# New functionality to verify mode game chosen by the user {easy, medium, hard}
 
 
 def mode(level):
@@ -147,9 +146,11 @@ def startGame():
 
         continuePlay = menu()
 
+# New functionality for the user to decide what to do after the end of the game
+
 
 def menu():
-    print('Press 1 to play again')
+    print 'Press 1 to play again'
     option = raw_input('Press 2 to exit\n')
     if option == '1':
         return True
