@@ -13,7 +13,13 @@ def loadWords():
     take a while to finish.
     """
     print "Loading word list from file..."
-    inFile = openFile(WORDLIST_FILENAME)
+    try:
+        inFile = openFile(WORDLIST_FILENAME)
+    except IOError:
+        print "Could not read file:", WORDLIST_FILENAME
+        print "Exiting ..."
+        exit()
+
     line = inFile.readline()
     wordlist = string.split(line)
     print " ", len(wordlist), "words loaded.\n"
@@ -21,7 +27,6 @@ def loadWords():
 
 
 def openFile(fileName):
-    # inFile: file
     inFile = open(fileName, 'r', 0)
 
     return inFile
