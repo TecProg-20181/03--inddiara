@@ -2,6 +2,9 @@ import random
 import string
 
 WORDLIST_FILENAME = "palavras.txt"
+GUESSES_EASY = 14
+GUESSES_MEDIUM = 8
+GUESSES_HARD = 5
 
 
 def loadWords():
@@ -10,11 +13,8 @@ def loadWords():
     take a while to finish.
     """
     print "Loading word list from file..."
-    # inFile: file
     inFile = openFile(WORDLIST_FILENAME)
-    # line: string
     line = inFile.readline()
-    # wordlist: list of strings
     wordlist = string.split(line)
     print " ", len(wordlist), "words loaded.\n"
     return random.choice(wordlist)
@@ -53,7 +53,8 @@ def printMenu(secretWord):
     print '\nChoose level:'
     print '1 - Easy'
     print '2 - Medium'
-    level = raw_input('3 - Hard\n')
+    print '3 - Hard\n'
+    level = input()
     print 'I am thinking of a word that is', len(secretWord), ' letters long.\n'
     print '------------------------------------------------\n'
 
@@ -84,17 +85,16 @@ def checkWin(secretWord, lettersGuessed):
         print '\nSorry, you ran out of guesses. The word was ', secretWord, '.'
 
 # New functionality to verify mode game chosen by the user {easy, medium, hard}
-
-
 def mode(level):
-    if level == '1':
-        guesses = 14
-    elif level == '2':
-        guesses = 8
-    elif level == '3':
-        guesses = 5
+
+    if level == 1:
+        guesses = GUESSES_EASY
+    elif level == 2:
+        guesses = GUESSES_MEDIUM
+    elif level == 3:
+        guesses = GUESSES_HARD
     else:
-        guesses = 8
+        guesses = GUESSES_MEDIUM
     return guesses
 
 
@@ -147,8 +147,6 @@ def startGame():
         continuePlay = menu()
 
 # New functionality for the user to decide what to do after the end of the game
-
-
 def menu():
     print 'Press 1 to play again'
     option = raw_input('Press 2 to exit\n')
