@@ -55,15 +55,28 @@ def getAvailableLetters():
 
 
 def printMenu(secretWord):
+    levelIsNotValid = True
     print '\nChoose level:'
-    print '1 - Easy'
-    print '2 - Medium'
-    print '3 - Hard\n'
-    level = input()
+    while(levelIsNotValid):
+        print '1 - Easy'
+        print '2 - Medium'
+        print '3 - Hard\n'
+        try:
+            level = input()
+        except NameError:
+            print "Level must be a number"
+            level = 0
+
+        if(level == 1 or level == 2 or level == 3):
+            levelIsNotValid = False
+        else:
+            print "\nPlease, choose a valid level:"
+
     print 'I am thinking of a word that is', len(secretWord), ' letters long.\n'
     print '------------------------------------------------\n'
 
     return level
+
 
 
 def updateAvailable(available, lettersGuessed):
