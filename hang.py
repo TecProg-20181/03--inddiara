@@ -1,28 +1,34 @@
 import random
 import string
+import logging
 
 WORDLIST_FILENAME = "palavras.txt"
 GUESSES_EASY = 14
 GUESSES_MEDIUM = 8
 GUESSES_HARD = 5
+LOG_FORMAT = '%(levelname)s:%(asctime)s - %(message)s'
+
+logging.basicConfig(filename = 'hangman.log',
+                    level = logging.INFO,
+                    format = LOG_FORMAT,
+                    filemode = 'w')
 
 
 def loadWords():
     """
-    Depending on the size of the word list, this function may
-    take a while to finish.
+    Depending on the size of the word list, this function may take a while to finish.
     """
-    print "Loading word list from file..."
+    logging.info("Loading word list from file...")
     try:
         inFile = openFile(WORDLIST_FILENAME)
     except IOError:
-        print "Could not read file:", WORDLIST_FILENAME
-        print "Exiting ..."
+        logging.error("Could not read file:"), WORDLIST_FILENAME
+        logging.info("Exiting ...")
         exit()
 
     line = inFile.readline()
     wordlist = string.split(line)
-    print " ", len(wordlist), "words loaded.\n"
+    print len(wordlist), "words loaded.\n"
     return random.choice(wordlist)
 
 
