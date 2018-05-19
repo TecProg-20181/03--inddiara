@@ -166,15 +166,21 @@ def startGame():
 
 # New functionality for the user to decide what to do after the end of the game
 def menu():
-    print 'Press 1 to play again'
-    option = raw_input('Press 2 to exit\n')
-    if option == '1':
-        return True
-    elif option == '2':
-        return False
-    else:
-        quit()
-
+    optionIsNotValid = True
+    while(optionIsNotValid):
+        print 'Press 1 to play again'
+        try:
+            option = input('Press 2 to exit\n')
+        except NameError:
+            print "\nOption must be a number"
+            option = 0
+        if option == 1:
+            return True
+        elif option == 2:
+            return False
+        else:
+            print "\nChoose a valid number"
+            optionIsNotValid = True
 
 def hangman():
 
